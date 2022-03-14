@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged:latest
 
 MAINTAINER Dave (Daviey) Walker <email@daviey.com>
 
