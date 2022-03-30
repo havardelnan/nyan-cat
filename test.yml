@@ -1,0 +1,14 @@
+.build-container:
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  stage: build-container
+  image: ncr.sky.nhn.no/nhn/ci-dind
+  services:
+    - docker:dind
+  before_script:
+    - echo "$HARBOR_TOKEN" | docker -D login -u $HARBOR_USER --password-stdin "$HARBOR_HOST"
+  script:
+    - docker build --tag $CI_APPLICATION_IMAGE:$CI_APPLICATION_TAG  .
+    - trivy image --exit-code 0  --no-progress  $CI_APPLICATION_IMAGE:$CI_APPLICATION_TAG
+    - trivy image --exit-code 1  --severity CRITICAL --no-progress $CI_APPLICATION_IMAGE:$CI_APPLICATION_TAG
+    - docker push $CI_APPLICATION_IMAGE:$CI_APPLICATION_TAG
