@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo3test
+  namespace: argocd
+spec:
+  destination:
+    namespace: demo3test
+    server: https://kubernetes.default.svc
+  project: demoapp
+  source:
+    helm:
+      parameters:
+      - name: hostname
+        value: demo3test.sky.nhn.no
+      - name: namespace
+        value: demo3test
+      - name: replicas
+        value: "1"
+      - name: image.imagename
+        value: ncr.sky.nhn.no/nhn/nyancat:0.0.16
+    path: charts/demoapp
+    repoURL: https://github.com/havardelnan/nyan-cat.git
+    targetRevision: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
