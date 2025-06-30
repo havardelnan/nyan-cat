@@ -2,3 +2,4 @@ namespace: demo2
 hostname: demo3006.sky.nhn.no
 image:
   imagename: ncr.sky.nhn.no/nhn/nyancat:0.0.16
+replicas: 6
