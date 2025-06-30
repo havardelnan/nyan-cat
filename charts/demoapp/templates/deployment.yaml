@@ -31,6 +31,14 @@ spec:
           protocol: TCP
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
         volumeMounts:
         - mountPath: /tmp
           name: tmp-dir
@@ -38,5 +46,12 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        fsGroup: 2000
+        runAsUser: 1001
+        runAsGroup: 1001
+        supplementalGroups: [501]
       volumes:
       - name: tmp-dir
+        emptyDir: {}
