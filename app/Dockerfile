@@ -1,6 +1,7 @@
 FROM nginxinc/nginx-unprivileged:latest
 
 LABEL maintainer="Dave (Daviey) Walker <email@daviey.com>"
+LABEL maintainer="Håvard Elnan <havard.elnan@nhn.no>"
 
 # Build arguments for image and tag
 ARG IMAGE_NAME=nyan-cat
