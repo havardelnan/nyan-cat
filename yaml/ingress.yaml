@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    dns.nhn.no/override-infrastructure: '{"infrastructure":["helsenett","internett"]}'
+  name: test-ingress
+  namespace: demo2
+spec:
+  ingressClassName: avi-ingress-class-internett
+  rules:
+  - host: {{ .Values.hostname }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: test-service
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - {{ .Values.hostname }}
+    secretName: demo-test-tls
