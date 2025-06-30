@@ -42,6 +42,8 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp-dir
+        - mountPath: /var/cache/nginx
+          name: var-cache
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -54,4 +56,6 @@ spec:
         supplementalGroups: [501]
       volumes:
       - name: tmp-dir
+        emptyDir: {}
+      - name: var-cache
         emptyDir: {}
