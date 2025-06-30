@@ -20,6 +20,8 @@
 	<div id="wave-b" class="hot rainbow"></div>
 	<div id="wave-b" class="cold rainbow"></div>
 
+	<div id="hostname-display"></div>
+
 	<div id="nyan-cat" class="frame1">
 		<div id="tail"></div>
 
@@ -47,6 +49,12 @@
 	<!-- Libs -->
 	<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Environment Variables -->
+	<script>
+		window.ENV_HOSTNAME = '${HOSTNAME}';
+		window.ENV_IMAGE = '${IMAGE}';
+		window.ENV_TAG = '${TAG}';
+	</script>
 	<!-- Nyan Stuff -->
 	<script src="js/nyan.js"></script>
 </body>

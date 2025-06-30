@@ -50,6 +50,26 @@ $(function() {
 	nyancat.init();
 	sparks.init($('.sparks-combo'));
 
+	// Display hostname, image and tag on the rainbow
+	var hostname = window.ENV_HOSTNAME || window.location.hostname || 'localhost';
+	var image = window.ENV_IMAGE || 'unknown';
+	var tag = window.ENV_TAG || 'latest';
+	
+	// Clean up if they contain template placeholders
+	if (hostname === '${HOSTNAME}' || hostname === '') {
+		hostname = window.location.hostname || 'localhost';
+	}
+	if (image === '${IMAGE}' || image === '') {
+		image = 'unknown';
+	}
+	if (tag === '${TAG}' || tag === '') {
+		tag = 'latest';
+	}
+	
+	// Create display text with hostname, image and tag
+	var displayText = "Hostname: " + hostname + '\n Image: ' + image + ':' + tag;
+	$('#hostname-display').html(displayText.replace(/\n/g, '<br>'));
+
 	var timer = setInterval(function () {
 		nyancat.cycleFrames();
 	}, 70);
